@@ -147,12 +147,11 @@ extension MBProgressHUD {
     
     // MARK: -  隐藏HUD
     class func hideHUD() {
-        if let winView = UIApplication.shared.delegate?.window as? UIView {
-            hide(for: winView, animated: true)
-        }
-        if let view = getCurrentUIVC()?.view {
-            hide(for: view, animated: true)
-        }
+        guard let winView = UIApplication.shared.delegate?.window as? UIView else { return }
+        hide(for: winView, animated: true)
+        
+        guard let view = getCurrentUIVC()?.view else { return }
+         hide(for: view, animated: true)
     }
     
     // MARK: -  获取当前window视图
@@ -235,8 +234,4 @@ extension MBProgressHUD {
         }
         return cc
     }
-}
-
-class BWLoading: MBProgressHUD {
-    
 }

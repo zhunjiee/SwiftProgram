@@ -39,7 +39,8 @@ class HttpNetwork: NSObject {
     //2.let是线程安全的
     // 对于单例实例来说，需要创建一个唯一对外输出实例的方法
     // 静态变量用static来处理
-    static let singleton  = HttpNetwork()
+    static let shared  = HttpNetwork()
+    
     ///当前网络状态
     var htNetworkStatus: HTNetworkStatus = HTNetworkStatus.HttpWifi
     
@@ -51,31 +52,33 @@ class HttpNetwork: NSObject {
         let  httpUrl = HTTPAPI.hostName + url
         // 设置请求头
         var headers = [String : String]()
-        headers["token"] = "f36fa865-ee3c-4f8d-805a-5a3ee42c0e8d"
+        guard let token = BWUserDefaults.shareInstance.getUserToken() else {
+            return
+        }
+        headers["token"] = token
         
         Alamofire.request(httpUrl, method: .get, parameters: params, encoding:URLEncoding.default, headers: headers).responseJSON { (response) in
             switch response.result {
             case .success:
-                if let value = response.result.value as? [String: Any] {
-                    let errorCode = String(value["code"] as? Int32 ?? -998)
-                    if errorCode == "1" {
-                        if value.keys.contains("data") {
-                            if (value["data"] is [AnyHashable : Any] || value["data"] is [Any]) {
-                                let data = value["data"]
-                                success(data as Any)
-                            } else {
-                                success(value as Any)
-                            }
+                guard let value = response.result.value as? [String: Any] else { break }
+                let responseCode = String(value["code"] as? Int32 ?? -998)
+                if responseCode == "1" {
+                    if value.keys.contains("data") {
+                        if (value["data"] is [AnyHashable : Any] || value["data"] is [Any]) {
+                            let data = value["data"]
+                            success(data as Any)
                         } else {
                             success(value as Any)
                         }
-                    } else if errorCode == "-100" {
-                        // token失效 退出登录
-                        
                     } else {
-                        let errorDes = value["msg"] as? String
-                        error(errorCode, errorDes ?? "网络连接错误!")
+                        success(value as Any)
                     }
+                } else if responseCode == "-100" {
+                    // token失效 退出登录
+                    
+                } else {
+                    let errorDes = value["msg"] as? String
+                    error(responseCode, errorDes ?? "网络连接错误!")
                 }
                 break
                 
@@ -95,31 +98,33 @@ class HttpNetwork: NSObject {
         let  httpUrl = HTTPAPI.hostName + url
         // 设置请求头
         var headers = [String : String]()
-        headers["token"] = "f36fa865-ee3c-4f8d-805a-5a3ee42c0e8d"
+        guard let token = BWUserDefaults.shareInstance.getUserToken() else {
+            return
+        }
+        headers["token"] = token
         
         Alamofire.request(httpUrl, method: .post, parameters: params, encoding:URLEncoding.default, headers: headers).responseJSON { (response) in
             switch response.result {
             case .success:
-                if let value = response.result.value as? [String: Any] {
-                    let errorCode = String(value["code"] as? Int32 ?? -998)
-                    if errorCode == "1" {
-                        if value.keys.contains("data") {
-                            if (value["data"] is [AnyHashable : Any] || value["data"] is [Any]) {
-                                let data = value["data"]
-                                success(data as Any)
-                            } else {
-                                success(value as Any)
-                            }
+                guard let value = response.result.value as? [String: Any] else { break }
+                let errorCode = String(value["code"] as? Int32 ?? -998)
+                if errorCode == "1" {
+                    if value.keys.contains("data") {
+                        if (value["data"] is [AnyHashable : Any] || value["data"] is [Any]) {
+                            let data = value["data"]
+                            success(data as Any)
                         } else {
                             success(value as Any)
                         }
-                    } else if errorCode == "-100" {
-                        // token失效 退出登录
-                        
                     } else {
-                        let errorDes = value["msg"] as? String
-                        error(errorCode, errorDes ?? "网络连接错误!")
+                        success(value as Any)
                     }
+                } else if errorCode == "-100" {
+                    // token失效 退出登录
+                    
+                } else {
+                    let errorDes = value["msg"] as? String
+                    error(errorCode, errorDes ?? "网络连接错误!")
                 }
                 break
                 

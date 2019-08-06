@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FruitGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51m-54-hn1" customClass="BackgrounView" customModule="FruitGame" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-VH-oXU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf3-C0-GIJ" userLabel="Game Rule Btn">
+                                <rect key="frame" x="303" y="59" width="96" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="ZUU-59-hql"/>
+                                    <constraint firstAttribute="height" constant="32" id="p7r-mx-A9L"/>
+                                </constraints>
+                                <state key="normal" image="youxishuoming"/>
+                                <connections>
+                                    <action selector="gameRuleBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xjW-CQ-sGB"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXv-EM-Ub1">
+                                <rect key="frame" x="171" y="770" width="72" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="HZd-Ez-KMi"/>
+                                    <constraint firstAttribute="height" constant="72" id="J15-FM-WkG"/>
+                                </constraints>
+                                <state key="normal" image="jianghua"/>
+                                <connections>
+                                    <action selector="speakBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PUi-x8-hLh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gy-zc-mZ0" userLabel="Voice Btn">
+                                <rect key="frame" x="367" y="104" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="c19-pw-gsX"/>
+                                    <constraint firstAttribute="height" constant="32" id="r6f-cY-3K7"/>
+                                </constraints>
+                                <state key="normal" image="jingyin"/>
+                                <state key="selected" image="kaiqi"/>
+                                <connections>
+                                    <action selector="silenceBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j8G-X0-Nb3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmM-UZ-m5G">
+                                <rect key="frame" x="134.5" y="788" width="145" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="145" id="8Id-ab-h35"/>
+                                    <constraint firstAttribute="height" constant="54" id="Pwf-B9-dJf"/>
+                                </constraints>
+                                <state key="normal" image="kaishiyouxi"/>
+                                <connections>
+                                    <action selector="beginGameBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahs-Bc-3Mc"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="morencaomei" translatesAutoresizingMaskIntoConstraints="NO" id="B5C-dL-J05">
+                                <rect key="frame" x="74.5" y="241" width="265" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="265" id="cUa-2i-mWC"/>
+                                    <constraint firstAttribute="height" constant="68" id="g7v-Tr-eLC"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQC-Vu-226" userLabel="Back Btn">
+                                <rect key="frame" x="15" y="59" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="4oa-Wl-Rxl"/>
+                                    <constraint firstAttribute="height" constant="32" id="rnO-FZ-JFK"/>
+                                </constraints>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GfP-uE-vpS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="UQC-Vu-226" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="0NP-lE-DIY"/>
+                            <constraint firstItem="51m-54-hn1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1bX-Ss-iry"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Pf3-C0-GIJ" secondAttribute="trailing" constant="15" id="2X6-m3-mAr"/>
+                            <constraint firstItem="RZC-VH-oXU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8ZE-od-Tfi"/>
+                            <constraint firstAttribute="bottom" secondItem="51m-54-hn1" secondAttribute="bottom" id="FUi-0m-x3O"/>
+                            <constraint firstItem="Pf3-C0-GIJ" firstAttribute="top" secondItem="UQC-Vu-226" secondAttribute="top" id="MSU-I5-6rj"/>
+                            <constraint firstItem="RZC-VH-oXU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="MZy-xQ-Pe8"/>
+                            <constraint firstItem="4gy-zc-mZ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="TjC-D0-Lo4"/>
+                            <constraint firstItem="51m-54-hn1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YrB-pS-HCM"/>
+                            <constraint firstItem="51m-54-hn1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cie-2R-iK9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RmM-UZ-m5G" secondAttribute="bottom" constant="20" id="cyG-Cn-ogv"/>
+                            <constraint firstItem="B5C-dL-J05" firstAttribute="top" secondItem="Pf3-C0-GIJ" secondAttribute="bottom" constant="150" id="fCP-fr-PEf"/>
+                            <constraint firstAttribute="bottom" secondItem="RZC-VH-oXU" secondAttribute="bottom" id="gPR-a7-13g"/>
+                            <constraint firstItem="B5C-dL-J05" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gWH-mc-ghI"/>
+                            <constraint firstItem="RmM-UZ-m5G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hsE-XS-i4q"/>
+                            <constraint firstItem="cXv-EM-Ub1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k8f-jq-bZs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cXv-EM-Ub1" secondAttribute="bottom" constant="20" id="nQe-8L-mM5"/>
+                            <constraint firstItem="4gy-zc-mZ0" firstAttribute="trailing" secondItem="Pf3-C0-GIJ" secondAttribute="trailing" id="pq0-Oh-odf"/>
+                            <constraint firstItem="RZC-VH-oXU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qrB-Nl-TWg"/>
+                            <constraint firstItem="UQC-Vu-226" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="yIU-t1-qcr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="alertParentView" destination="RZC-VH-oXU" id="ez3-GD-Dej"/>
+                        <outlet property="beginBtn" destination="RmM-UZ-m5G" id="m6n-HR-wWJ"/>
+                        <outlet property="bgView" destination="51m-54-hn1" id="R1B-Io-6xD"/>
+                        <outlet property="centerImgView" destination="B5C-dL-J05" id="z1e-gb-3L6"/>
+                        <outlet property="gameRuleBtn" destination="Pf3-C0-GIJ" id="kyN-ku-BVh"/>
+                        <outlet property="silenceBtn" destination="4gy-zc-mZ0" id="u1q-Bi-GY9"/>
+                        <outlet property="silenceBtnTopCons" destination="TjC-D0-Lo4" id="owb-I5-r9w"/>
+                        <outlet property="speakBtn" destination="cXv-EM-Ub1" id="uEZ-Fg-Kez"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37.681159420289859" y="18.75"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="64" height="64"/>
+        <image name="jianghua" width="144" height="146"/>
+        <image name="jingyin" width="64" height="64"/>
+        <image name="kaiqi" width="64" height="64"/>
+        <image name="kaishiyouxi" width="290" height="98"/>
+        <image name="morencaomei" width="530" height="137"/>
+        <image name="youxishuoming" width="193" height="64"/>
+    </resources>
+</document>

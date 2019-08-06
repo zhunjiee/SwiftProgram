@@ -8,5 +8,7 @@
 
 import UIKit
 
+// 常用参数
 let configParam = "/api/article/config_parame"
+// 订单列表
 let assd = "/api/article/create_order"
