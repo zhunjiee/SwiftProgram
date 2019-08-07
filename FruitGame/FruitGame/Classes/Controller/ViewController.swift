@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     var animationTime: Double = 6.0 // 水果下落的时间
     var fruitModelArray = [FruitModel?]() // 存放水果模型的数组
     var showFruitArray = [FruitModel?]()   // 屏幕显示的水果数组
-    var index: Int = 0  // 显示水果的索引
+    var createIndex: Int = 0  // 生成水果的索引
     var totalScore: Int = 0 // 总的分数
     
     // MARK: -  懒加载
@@ -141,9 +141,10 @@ class ViewController: UIViewController {
     
     /// 创建水果下落动画
     @objc func showFruitRain() {
-        showFruitArray.append(fruitModelArray[index])
+        showFruitArray.append(fruitModelArray[createIndex])
         //创建画布
         let moveLayer = CALayer()
+        moveLayer.backgroundColor = UIColor.green.cgColor
         moveLayer.bounds = CGRect(x: 0, y: 0, width: fruitWH, height: fruitWH)
         moveLayer.anchorPoint = CGPoint(x: 0, y: 0)
         moveLayer.position = CGPoint(x: 0, y: -fruitWH)
@@ -169,8 +170,10 @@ class ViewController: UIViewController {
         moveAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         moveAnimation.delegate = self
         moveLayer.add(moveAnimation, forKey: "move")
-        index += 1
+        createIndex += 1
     }
+    
+    // MARK: -  私有方法
     
     /// 开始动画
     public func startAnimation() {
@@ -182,7 +185,7 @@ class ViewController: UIViewController {
     
     /// 结束动画
     public func stopAnimation() {
-        index = 0
+        createIndex = 0
         showFruitArray.removeAll()
         print("停止水果下落")
         //删除当前红包layers
@@ -219,6 +222,8 @@ class ViewController: UIViewController {
             timer.invalidate()
         })
     }
+    
+    // MARK: -  点击事件
     
     /// 点击了开始游戏按钮
     @IBAction func beginGameBtnDidClick(_ sender: UIButton) {
@@ -278,7 +283,7 @@ extension ViewController {
                 totalScore += model?.score ?? 0
                 // 创建并显示点击得分
                 let alertView  = UIView()
-                alertView.frame = CGRect(x: touchPoint.x - 30, y: touchPoint.y-30, width: 100, height: 40)
+                alertView.frame = CGRect(x: touchPoint.x - 30, y: touchPoint.y, width: 100, height: 40)
                 alertParentView.addSubview(alertView)
                 let label = UILabel()
                 label.font = UIFont.systemFont(ofSize: 40)
@@ -291,7 +296,7 @@ extension ViewController {
                 // 添加得分动画
                 UIView.animate(withDuration: 0.25, animations: {
                     alertView.alpha = 0
-                    alertView.frame = CGRect(x: touchPoint.x - 30, y: touchPoint.y - 30, width: 60, height: 30)
+                    alertView.frame = CGRect(x: touchPoint.x - 30, y: touchPoint.y - 30, width: 100, height: 40)
                     // 设置被点击后的图片
                     layer.contents = UIImage(named: "sangshen")?.cgImage
                 }) { (finished) in
@@ -340,6 +345,66 @@ extension ViewController {
 }
 
 
+// MARK: -  讲话完成的方法
+extension ViewController {
+    fileprivate func completeSpeakWith(fruitIndex: Int) {
+        guard let sublayers = self.bgView.layer.sublayers else { return }
+        // 遍历子layer,匹配是否有符合条件的子layer
+        for (index, layer) in sublayers.enumerated() {
+            let model = showFruitArray[index]
+            print("fruitIndex = \(fruitIndex), model.ID = \(model?.ID ?? -1)")
+            if (model?.ID == fruitIndex && layer.value(forKey: "clicked") as? String != "YES") {
+                print("layer.frame = \(layer.frame)")
+                // 设置被点击的标志,避免重复点击
+                layer.setValue("YES", forKey: "clicked")
+                // 计算总得分
+                totalScore += model?.score ?? 0
+                // 创建并显示点击得分
+                let alertView  = UIView()
+                // 获取动画中的位置
+                let animateX = (layer.presentation()?.frame.origin.x ?? 0) - fruitWH*0.5
+                let animateY = layer.presentation()?.frame.origin.y ?? 0
+                alertView.frame = CGRect(x: animateX, y: animateY, width: 100, height: 40)
+                alertParentView.addSubview(alertView)
+                let label = UILabel()
+                label.font = UIFont.systemFont(ofSize: 40)
+                label.textAlignment = .center
+                label.text = String(format: "+%d", model?.score ?? 0)
+                label.textColor = BWColor(250, 198, 1)
+                label.frame = CGRect(x: 0, y: 0, width: alertView.frame.width, height: alertView.frame.height)
+                alertView.addSubview(label)
+                
+                // 添加得分动画
+                UIView.animate(withDuration: 0.5, animations: {
+                    alertView.alpha = 0
+                    alertView.frame = CGRect(x: animateX, y: animateY - 30, width: 100, height: 40)
+                    // 设置被点击后的图片
+                    layer.contents = UIImage(named: "sangshen")?.cgImage
+                    
+                }) { (finished) in
+                    layer.removeFromSuperlayer()
+                    alertView.removeFromSuperview()
+                    if self.showFruitArray.count >= index + 1 {
+                        self.showFruitArray.remove(at: index)
+                    }
+                    // 判断是否点击的是最后一个水果(屏幕上没有其他水果了),提前结束游戏
+                    if self.showFruitArray.count == 0 {
+                        // 最后一个水果提前结束动画
+                        self.stopAnimation()
+                        self.gameTimer.invalidate()
+                        self.progressView.pauseProgress()
+                        self.gameOverView.scoreLabel.text = String(format: "%d", self.totalScore)
+                        self.view.addSubview(self.gameOverView)
+                    }
+                }
+                
+                break
+            }
+        }
+    }
+}
+
+
 // MARK: - GameRuleDelegate
 extension ViewController: GameRuleDelegate {
     func gameRuleCloseBtnDidClick() {
@@ -360,60 +425,5 @@ extension ViewController: CAAnimationDelegate {
             }
         }
         print("屏幕上现在一共有\(showFruitArray.count)个水果")
-    }
-}
-
-// MARK: -  讲话完成的方法
-extension ViewController {
-    fileprivate func completeSpeakWith(fruitIndex: Int) {
-        guard let sublayers = self.bgView.layer.sublayers else { return }
-        // 便利子layer,匹配点击位置是否在子layer上
-        for (index, layer) in sublayers.enumerated() {
-            let model = showFruitArray[index]
-            print("fruitIndex = \(fruitIndex), model.ID = \(model?.ID ?? -1)")
-            if (model?.ID == fruitIndex && layer.value(forKey: "clicked") as? String != "YES") {
-                print("layer.frame = \(layer.frame)")
-                // 设置被点击的标志,避免重复点击
-                layer.setValue("YES", forKey: "clicked")
-                // 计算总得分
-                totalScore += model?.score ?? 0
-                // 创建并显示点击得分
-                let alertView  = UIView()
-                alertView.frame = CGRect(x: layer.frame.origin.x - 30, y: layer.frame.origin.y-30, width: 100, height: 40)
-                alertParentView.addSubview(alertView)
-                let label = UILabel()
-                label.font = UIFont.systemFont(ofSize: 40)
-                label.textAlignment = .center
-                label.text = String(format: "+%d", model?.score ?? 0)
-                label.textColor = BWColor(250, 198, 1)
-                label.frame = CGRect(x: 0, y: 0, width: alertView.frame.width, height: alertView.frame.height)
-                alertView.addSubview(label)
-                
-                // 添加得分动画
-                UIView.animate(withDuration: 0.25, animations: {
-                    alertView.alpha = 0
-                    alertView.frame = CGRect(x: layer.frame.origin.x - 30, y: layer.frame.origin.y - 30, width: 60, height: 30)
-                    // 设置被点击后的图片
-                    layer.contents = UIImage(named: "sangshen")?.cgImage
-                }) { (finished) in
-                    alertView.removeFromSuperview()
-                    layer.removeFromSuperlayer()
-                    if self.showFruitArray.count >= index + 1 {
-                        self.showFruitArray.remove(at: index)
-                    }
-                    // 判断是否点击的是最后一个水果(屏幕上没有其他水果了),提前结束游戏
-                    if self.showFruitArray.count == 0 {
-                        // 最后一个水果提前结束动画
-                        self.stopAnimation()
-                        self.gameTimer.invalidate()
-                        self.progressView.pauseProgress()
-                        self.gameOverView.scoreLabel.text = String(format: "%d", self.totalScore)
-                        self.view.addSubview(self.gameOverView)
-                    }
-                }
-                
-                break
-            }
-        }
     }
 }
