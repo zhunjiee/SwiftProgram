@@ -23,6 +23,9 @@
 		78A8844622F92E36003F7C28 /* HttpNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8844322F92E36003F7C28 /* HttpNetwork.swift */; };
 		78A8844722F92E36003F7C28 /* JSON2Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8844422F92E36003F7C28 /* JSON2Model.swift */; };
 		78A8844822F92E36003F7C28 /* ConstantHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8844522F92E36003F7C28 /* ConstantHeader.swift */; };
+		78A8844A22FBF46F003F7C28 /* GameAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8844922FBF46F003F7C28 /* GameAlertView.swift */; };
+		78A8844C22FBF47F003F7C28 /* GameAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78A8844B22FBF47F003F7C28 /* GameAlertView.xib */; };
+		78A8844E22FC0BBC003F7C28 /* UIView+Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A8844D22FC0BBC003F7C28 /* UIView+Circle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		78A8844322F92E36003F7C28 /* HttpNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpNetwork.swift; sourceTree = "<group>"; };
 		78A8844422F92E36003F7C28 /* JSON2Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON2Model.swift; sourceTree = "<group>"; };
 		78A8844522F92E36003F7C28 /* ConstantHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantHeader.swift; sourceTree = "<group>"; };
+		78A8844922FBF46F003F7C28 /* GameAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAlertView.swift; sourceTree = "<group>"; };
+		78A8844B22FBF47F003F7C28 /* GameAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameAlertView.xib; sourceTree = "<group>"; };
+		78A8844D22FC0BBC003F7C28 /* UIView+Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Circle.swift"; path = "../../../MengTianXia/MengTianXia/Others/Extension/UIView+Circle.swift"; sourceTree = "<group>"; };
 		AB710E908480FDDAE42C0687 /* Pods-FruitGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FruitGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-FruitGame/Pods-FruitGame.release.xcconfig"; sourceTree = "<group>"; };
 		C2898A759D2B994DC87FE88E /* Pods_FruitGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FruitGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,6 +111,8 @@
 				7817B6C622F7F83D00971FE7 /* GameRuleView.swift */,
 				7817B6C822F7F84E00971FE7 /* GameRuleView.xib */,
 				7817B6CA22F80D0C00971FE7 /* CustomProgressView.swift */,
+				78A8844922FBF46F003F7C28 /* GameAlertView.swift */,
+				78A8844B22FBF47F003F7C28 /* GameAlertView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 		78A8844222F92E29003F7C28 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				78A8844D22FC0BBC003F7C28 /* UIView+Circle.swift */,
 				78A8844522F92E36003F7C28 /* ConstantHeader.swift */,
 				78A8844322F92E36003F7C28 /* HttpNetwork.swift */,
 				78A8844422F92E36003F7C28 /* JSON2Model.swift */,
@@ -221,6 +230,7 @@
 				782AA8D022F3D94400B6E35E /* LaunchScreen.storyboard in Resources */,
 				782AA8CD22F3D94400B6E35E /* Assets.xcassets in Resources */,
 				7817B6C922F7F84E00971FE7 /* GameRuleView.xib in Resources */,
+				78A8844C22FBF47F003F7C28 /* GameAlertView.xib in Resources */,
 				7817B6C522F7CFFE00971FE7 /* GameOverView.xib in Resources */,
 				782AA8CB22F3D94200B6E35E /* Main.storyboard in Resources */,
 			);
@@ -280,10 +290,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78A8844E22FC0BBC003F7C28 /* UIView+Circle.swift in Sources */,
 				782AA8C822F3D94200B6E35E /* ViewController.swift in Sources */,
 				78A8844122F92E05003F7C28 /* FruitModel.swift in Sources */,
 				7817B6C722F7F83D00971FE7 /* GameRuleView.swift in Sources */,
 				7817B6CB22F80D0C00971FE7 /* CustomProgressView.swift in Sources */,
+				78A8844A22FBF46F003F7C28 /* GameAlertView.swift in Sources */,
 				78A8844822F92E36003F7C28 /* ConstantHeader.swift in Sources */,
 				7817B6C122F7C19B00971FE7 /* BackgrounView.swift in Sources */,
 				7817B6C322F7CFC100971FE7 /* GameOverView.swift in Sources */,
@@ -439,7 +451,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E9NKWLKTG4;
 				INFOPLIST_FILE = FruitGame/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,7 +471,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E9NKWLKTG4;
 				INFOPLIST_FILE = FruitGame/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

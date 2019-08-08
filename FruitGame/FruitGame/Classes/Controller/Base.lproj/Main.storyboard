@@ -24,7 +24,41 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RZC-VH-oXU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_caomei" translatesAutoresizingMaskIntoConstraints="NO" id="oqg-sT-S9l" customClass="fruit">
+                                        <rect key="frame" x="141" y="225" width="56" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="56" id="9pF-Ii-7e5"/>
+                                            <constraint firstAttribute="height" constant="90" id="Rhp-ky-vnS"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_caomei" translatesAutoresizingMaskIntoConstraints="NO" id="RJz-oo-TuE" customClass="fruit">
+                                        <rect key="frame" x="217" y="225" width="56" height="90"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_caomei" translatesAutoresizingMaskIntoConstraints="NO" id="sjj-Pr-0cM" customClass="fruit">
+                                        <rect key="frame" x="293" y="225" width="56" height="90"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_caomei" translatesAutoresizingMaskIntoConstraints="NO" id="5E7-V8-wzb" customClass="fruit">
+                                        <rect key="frame" x="65" y="225" width="56" height="90"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="sjj-Pr-0cM" firstAttribute="top" secondItem="oqg-sT-S9l" secondAttribute="top" id="1cl-ec-q11"/>
+                                    <constraint firstItem="sjj-Pr-0cM" firstAttribute="height" secondItem="oqg-sT-S9l" secondAttribute="height" id="3cD-UZ-DxP"/>
+                                    <constraint firstItem="5E7-V8-wzb" firstAttribute="width" secondItem="oqg-sT-S9l" secondAttribute="width" id="ENF-1b-7ZJ"/>
+                                    <constraint firstItem="sjj-Pr-0cM" firstAttribute="leading" secondItem="RJz-oo-TuE" secondAttribute="trailing" constant="20" id="HH7-BW-7I4"/>
+                                    <constraint firstItem="RJz-oo-TuE" firstAttribute="width" secondItem="oqg-sT-S9l" secondAttribute="width" id="O0G-Zk-aYm"/>
+                                    <constraint firstItem="RJz-oo-TuE" firstAttribute="top" secondItem="oqg-sT-S9l" secondAttribute="top" id="SYq-Tt-9uF"/>
+                                    <constraint firstItem="oqg-sT-S9l" firstAttribute="top" secondItem="RZC-VH-oXU" secondAttribute="top" constant="225" id="Shc-sI-Drg"/>
+                                    <constraint firstItem="RJz-oo-TuE" firstAttribute="height" secondItem="oqg-sT-S9l" secondAttribute="height" id="Zzo-hO-md5"/>
+                                    <constraint firstItem="sjj-Pr-0cM" firstAttribute="width" secondItem="oqg-sT-S9l" secondAttribute="width" id="i2N-Vl-xrn"/>
+                                    <constraint firstItem="oqg-sT-S9l" firstAttribute="leading" secondItem="5E7-V8-wzb" secondAttribute="trailing" constant="20" id="mO9-fD-NCz"/>
+                                    <constraint firstItem="5E7-V8-wzb" firstAttribute="height" secondItem="oqg-sT-S9l" secondAttribute="height" id="pHC-Hj-IKR"/>
+                                    <constraint firstItem="oqg-sT-S9l" firstAttribute="centerX" secondItem="RZC-VH-oXU" secondAttribute="centerX" constant="-38" id="qUB-dz-L29"/>
+                                    <constraint firstItem="5E7-V8-wzb" firstAttribute="top" secondItem="oqg-sT-S9l" secondAttribute="top" id="tcZ-pe-jOu"/>
+                                    <constraint firstItem="RJz-oo-TuE" firstAttribute="leading" secondItem="oqg-sT-S9l" secondAttribute="trailing" constant="20" id="yb4-Fn-KER"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf3-C0-GIJ" userLabel="Game Rule Btn">
                                 <rect key="frame" x="303" y="59" width="96" height="32"/>
@@ -44,9 +78,6 @@
                                     <constraint firstAttribute="height" constant="72" id="J15-FM-WkG"/>
                                 </constraints>
                                 <state key="normal" image="jianghua"/>
-                                <connections>
-                                    <action selector="speakBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PUi-x8-hLh"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gy-zc-mZ0" userLabel="Voice Btn">
                                 <rect key="frame" x="367" y="104" width="32" height="32"/>
@@ -71,13 +102,6 @@
                                     <action selector="beginGameBtnDidClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ahs-Bc-3Mc"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="morencaomei" translatesAutoresizingMaskIntoConstraints="NO" id="B5C-dL-J05">
-                                <rect key="frame" x="74.5" y="241" width="265" height="68"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="265" id="cUa-2i-mWC"/>
-                                    <constraint firstAttribute="height" constant="68" id="g7v-Tr-eLC"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQC-Vu-226" userLabel="Back Btn">
                                 <rect key="frame" x="15" y="59" width="32" height="32"/>
                                 <constraints>
@@ -103,9 +127,7 @@
                             <constraint firstItem="51m-54-hn1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="YrB-pS-HCM"/>
                             <constraint firstItem="51m-54-hn1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cie-2R-iK9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RmM-UZ-m5G" secondAttribute="bottom" constant="20" id="cyG-Cn-ogv"/>
-                            <constraint firstItem="B5C-dL-J05" firstAttribute="top" secondItem="Pf3-C0-GIJ" secondAttribute="bottom" constant="150" id="fCP-fr-PEf"/>
                             <constraint firstAttribute="bottom" secondItem="RZC-VH-oXU" secondAttribute="bottom" id="gPR-a7-13g"/>
-                            <constraint firstItem="B5C-dL-J05" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gWH-mc-ghI"/>
                             <constraint firstItem="RmM-UZ-m5G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hsE-XS-i4q"/>
                             <constraint firstItem="cXv-EM-Ub1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k8f-jq-bZs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cXv-EM-Ub1" secondAttribute="bottom" constant="20" id="nQe-8L-mM5"/>
@@ -119,7 +141,6 @@
                         <outlet property="alertParentView" destination="RZC-VH-oXU" id="ez3-GD-Dej"/>
                         <outlet property="beginBtn" destination="RmM-UZ-m5G" id="m6n-HR-wWJ"/>
                         <outlet property="bgView" destination="51m-54-hn1" id="R1B-Io-6xD"/>
-                        <outlet property="centerImgView" destination="B5C-dL-J05" id="z1e-gb-3L6"/>
                         <outlet property="gameRuleBtn" destination="Pf3-C0-GIJ" id="kyN-ku-BVh"/>
                         <outlet property="silenceBtn" destination="4gy-zc-mZ0" id="u1q-Bi-GY9"/>
                         <outlet property="silenceBtnTopCons" destination="TjC-D0-Lo4" id="owb-I5-r9w"/>
@@ -133,11 +154,11 @@
     </scenes>
     <resources>
         <image name="back" width="64" height="64"/>
+        <image name="fruit_caomei" width="110" height="137"/>
         <image name="jianghua" width="144" height="146"/>
         <image name="jingyin" width="64" height="64"/>
         <image name="kaiqi" width="64" height="64"/>
         <image name="kaishiyouxi" width="290" height="98"/>
-        <image name="morencaomei" width="530" height="137"/>
         <image name="youxishuoming" width="193" height="64"/>
     </resources>
 </document>
