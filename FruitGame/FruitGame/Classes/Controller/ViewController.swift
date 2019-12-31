@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var alertParentView: UIView!     // 添加点击得分的视图
     @IBOutlet weak var gameRuleBtn: UIButton!   // 游戏规则
     @IBOutlet weak var silenceBtn: UIButton!    // 静音按钮
-    @IBOutlet weak var centerImgView: UIImageView!  // 开始前的水果占位图
+    @IBOutlet weak var centerFruitView: UIView!  // 开始前的水果占位图
     @IBOutlet weak var beginBtn: UIButton!  // 开始游戏按钮
     @IBOutlet weak var speakBtn: UIButton!  // 讲话按钮
     @IBOutlet weak var silenceBtnTopCons: NSLayoutConstraint!   // 静音按钮距离顶部约束
@@ -331,18 +331,44 @@ class ViewController: UIViewController {
         speakBtn.addGestureRecognizer(longPress)
     }
     
+    
     /// 点击了开始游戏按钮
     @IBAction func beginGameBtnDidClick(_ sender: UIButton) {
         // 设置控件的显示状态
         sender.isHidden = true
-        centerImgView.isHidden = true
-        if gameMode == .voiceMode {
-            speakBtn.isHidden = false
+        // 为草莓添加下落动画, 动画结束后开始游戏
+        fruitCountDown()
+    }
+
+    /// 水果倒计时
+    var centerFruitIndex = 0
+    @objc func fruitCountDown() {
+        let fruitsArray: [UIView] = centerFruitView.subviews;
+        if centerFruitIndex > fruitsArray.count - 1 {
+            // 水果复位
+            for i in 0..<centerFruitView.subviews.count {
+                 let fruit = centerFruitView.subviews[i]
+                fruit.frame = CGRect(x: 76 * CGFloat(i), y: 0, width: 56, height: 80)
+            }
+            centerFruitIndex = 0
+            centerFruitView.isHidden = true
+            if gameMode == .voiceMode {
+                speakBtn.isHidden = false
+            }
+            gameRuleBtn.isHidden = true
+            silenceBtnTopCons.constant = 0
+            // 开始游戏
+            beginGame()
+            return
         }
-        gameRuleBtn.isHidden = true
-        silenceBtnTopCons.constant = 15
-        // 开始游戏
-        beginGame()
+        UIView.animate(withDuration: 1.0, animations: {
+            let fruit = fruitsArray[self.centerFruitIndex]
+//            fruit.frame = CGRect(x: 76 * CGFloat(self.centerFruitIndex), y: BWScreenH - BWStatusBarHeight - 227, width: 56, height: 80)
+            fruit.frame = CGRect(x: 76 * CGFloat(self.centerFruitIndex), y: BWScreenH - self.centerFruitView.frame.origin.y, width: 56, height: 80)
+        }) { (finished) in
+            self.centerFruitIndex += 1
+            self.fruitCountDown()
+        }
     }
     
     /// 返回
@@ -405,15 +431,16 @@ extension ViewController {
     /// 点击再来一次按钮
     @objc func playAgainBtnDidClick() {
         gameOverView.removeFromSuperview()
-        // 开始游戏
-        beginGame()
+        centerFruitView.isHidden = false
+        speakBtn.isHidden = true
+        fruitCountDown()
     }
     
     /// 游戏结束后点击关闭按钮
     @objc func closeBtnDidClick() {
         beginBtn.isHidden = false
         speakBtn.isHidden = true
-        centerImgView.isHidden = false
+        centerFruitView.isHidden = false
         gameRuleBtn.isHidden = false
         silenceBtnTopCons.constant = 60
         gameOverView.removeFromSuperview()
